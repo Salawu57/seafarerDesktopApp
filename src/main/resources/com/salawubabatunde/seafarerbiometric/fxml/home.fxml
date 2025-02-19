@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="rootPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1349.0" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.HomeController">
+   <left>
+      <AnchorPane prefHeight="812.0" prefWidth="278.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="812.0" prefWidth="226.0" spacing="20.0" styleClass="sideBar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane fx:id="imageContainer" prefHeight="83.0" prefWidth="279.0" styleClass="imageContainer">
+                     <children>
+                        <ImageView fx:id="logoImage" fitHeight="72.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                           <image>
+                              <Image url="@../images/logo.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <Label styleClass="menu-label" text="Main Menu">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Label>
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                     <children>
+                        <HBox fx:id="dashboardNav" alignment="CENTER_LEFT" onMouseClicked="#loadDashboardFXML" prefHeight="34.0" prefWidth="278.0" spacing="5.0" styleClass="navigationList">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/home_new.png" />
+                                 </image>
+                              </ImageView>
+                              <Label onMouseClicked="#loadDashboardFXML" styleClass="menu-navigation-list" text="Dashboard" />
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="15.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <HBox fx:id="captureNav" alignment="CENTER_LEFT" onMouseClicked="#loadCaptureBiometricFXML" prefHeight="34.0" prefWidth="278.0" spacing="5.0" styleClass="navigationList">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/biometric.png" />
+                                 </image>
+                              </ImageView>
+                              <Label onMouseClicked="#loadCaptureBiometricFXML" styleClass="menu-navigation-list" text="Capture Biometric" />
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="15.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox fx:id="biometricNav" alignment="CENTER_LEFT" onMouseClicked="#biometricVerificationFXML" prefHeight="34.0" prefWidth="278.0" spacing="5.0" styleClass="navigationList">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/verification.png" />
+                                 </image>
+                              </ImageView>
+                              <Label onMouseClicked="#biometricVerificationFXML" styleClass="menu-navigation-list" text="Biometric Verification">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="15.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" onMouseClicked="#logoutFXML" prefHeight="34.0" prefWidth="278.0" spacing="5.0" styleClass="navigationList">
+                           <children>
+                              <ImageView fitHeight="26.0" fitWidth="101.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/logout.png" />
+                                 </image>
+                              </ImageView>
+                              <Label onMouseClicked="#logoutFXML" styleClass="menu-navigation-list" text="Log out">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="15.0" top="5.0" />
+                           </padding>
+                           <VBox.margin>
+                              <Insets left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children></VBox>
+         </children>
+      </AnchorPane>
+   </left>
+
+   <center>
+      <AnchorPane focusTraversable="true" styleClass="rootPane" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane styleClass="topBar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox alignment="CENTER_RIGHT" prefHeight="81.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="username" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="102.0" styleClass="adminName" text="John User" />
+                        <StackPane prefHeight="82.0" prefWidth="64.0">
+                           <children>
+
+                              <ImageView fx:id="userImage" fitHeight="42.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="false">
+                                 <image>
+                                    <Image url="@../images/default.jpg" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </StackPane>
+                     </children>
+                  </HBox>
+               </children></AnchorPane>
+            <AnchorPane fx:id="centerPane" layoutY="89.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" layoutX="-3.0" layoutY="2.0" prefWidth="1074.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+                     <content>
+                        <StackPane fx:id="contentStackPane" styleClass="defaultBg">
+                           <padding>
+                              <Insets top="30.0" />
+                           </padding>
+                        </StackPane>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

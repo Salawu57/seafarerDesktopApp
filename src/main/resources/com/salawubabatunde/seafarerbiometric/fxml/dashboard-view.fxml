@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1071.0" stylesheets="@../css/CaptureBiometric.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.DashboardController">
+     <children>
+      <Label styleClass="pageTitle" text="Dashboard" />
+      <HBox layoutY="67.0" prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="67.0">
+         <children>
+            <Pane prefHeight="100.0" prefWidth="300.0" styleClass="topStat">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="301.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="215.0" spacing="15.0">
+                           <children>
+                              <Label styleClass="topStatLabel" text="Total No. of Seafarers" />
+                              <Label fx:id="totalSeafarer" styleClass="topStatCount" text="3" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="10.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/seafarer.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane prefHeight="100.0" prefWidth="369.0" styleClass="topStat">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="352.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="381.0" spacing="15.0">
+                           <children>
+                              <Label styleClass="topStatLabel" text="Seafarer with Biometric Pending" />
+                              <Label fx:id="pendingBiometric" styleClass="topStatCount" text="3" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="10.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/not_verify.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+            <Pane prefHeight="100.0" prefWidth="359.0" styleClass="topStat">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="345.0">
+                     <children>
+                        <VBox prefHeight="100.0" prefWidth="323.0" spacing="15.0">
+                           <children>
+                              <Label styleClass="topStatLabel" text="Seafarer with Biometric Captured" />
+                              <Label fx:id="captureBiometric" styleClass="topStatCount" text="3" />
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <padding>
+                              <Insets left="10.0" top="20.0" />
+                           </padding>
+                        </VBox>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/capture.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="8.0" layoutY="176.0" prefWidth="1071.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+         <children>
+            <VBox prefWidth="1061.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <TableView fx:id="seafarerTable" prefHeight="370.0" prefWidth="1071.0">
+                    <columns>
+                      <TableColumn fx:id="firstName" prefWidth="189.0" text="First Name" />
+                      <TableColumn fx:id="lastName" minWidth="0.0" prefWidth="289.0" text="Last Name" />
+                        <TableColumn fx:id="otherName" prefWidth="306.0" text="Other Name" />
+                        <TableColumn fx:id="status" prefWidth="271.0" text="Biomtric Status" />
+                       
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

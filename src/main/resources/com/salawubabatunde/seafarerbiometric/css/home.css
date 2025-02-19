@@ -1,0 +1,86 @@
+
+@import '../fonts/Fonts.css';
+@import 'MFXColors.css';
+
+.rootPane {
+	-fx-background-color: #f2f3f9;
+	-fx-font-family: 'Visby Round CF Medium';
+}
+.sideBar, .topBar, .container{
+ -fx-background-color:#fff;
+}
+
+.topBar{
+  -fx-border-color: #f2f3f9 #f2f3f9 transparent transparent; /* Top is transparent, other sides are black */
+    -fx-border-width: 1px 1px 0px 0px; /* No top border, others are 2px */
+    -fx-border-style: solid;
+}
+.navigationList:hover{
+-fx-background-color: #f3f3f3;
+}
+
+.active{
+-fx-background-color: #f3f3f3;
+}
+
+
+.adminName{
+	-fx-font-size: 14;
+	-fx-font-family: 'Visby Round CF Medium';
+}
+
+.imageContainer{
+    -fx-border-color: #f2f3f9 #f2f3f9 #f2f3f9 #f2f3f9; /* Top is transparent, other sides are black */
+    -fx-border-width: 1px 1px 1px 1px; /* No top border, others are 2px */
+    -fx-border-style: solid;
+}
+.logoImage{
+-fx-translate-x: 50%;
+    -fx-translate-y: 50%;
+}
+
+.giude{
+ -fx-border-color: #fff #fff #fff #fff; /* Top is transparent, other sides are black */
+    -fx-border-width: 1px 1px 1px 1px; /* No top border, others are 2px */
+    -fx-border-style: solid;
+}
+
+.giude2{
+-fx-background-color: #fff;
+}
+
+.giude3{
+-fx-background-color: red;
+}
+
+.menu-label, .menu-navigation-list {
+	-fx-font-family: 'Visby Round CF Medium';
+	-fx-font-size: 14;
+	-fx-text-fill: #495584;
+}
+
+.defaultBg{
+-fx-background-color: #f2f3f9;
+}
+
+.topStat{
+    -fx-background-color: #fff;
+	-fx-background-radius: 5;
+	-fx-border-color: #fff;
+	-fx-border-radius: 5;
+	-fx-padding: 10;
+}
+
+.topStatLabel{
+-fx-font-size: 16;
+}
+.topStatCount{
+-fx-font-size: 24;
+-fx-font-family: 'Visby Round CF Bold';
+}
+
+.pageTitle{
+-fx-font-size: 26;
+-fx-font-family: 'Visby Round CF Bold';
+}
+

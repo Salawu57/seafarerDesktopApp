@@ -1,0 +1,316 @@
+
+@import '../fonts/Fonts.css';
+@import 'Common.css';
+@import 'MFXColors.css';
+
+
+.container{
+    -fx-background-color: #fff;
+	-fx-background-radius: 5;
+	-fx-border-color: #fff;
+	-fx-border-radius: 5;
+	-fx-padding: 10;
+}
+
+.defaultBg{
+-fx-background-color: #f2f3f9;
+}
+
+.pageTitle{
+-fx-font-size: 26;
+-fx-font-family: 'Visby Round CF Bold';
+}
+
+.infoTitle{
+ -fx-font-size: 18;
+ -fx-font-family: 'Visby Round CF Bold';
+}
+
+.subTitle{
+ -fx-font-size: 16;
+ -fx-font-family: 'Visby Round CF Medium';
+}
+
+.button {
+	-fx-font-family: 'Visby Round CF Medium';
+	-fx-text-fill: -mfx-text-he;
+}
+
+.button .ripple-generator {
+	-mfx-ripple-radius: 40;
+	-mfx-auto-clip: true;
+}
+
+.message{
+ -fx-font-size: 16;
+ -fx-font-family: 'Visby Round CF Medium';
+ -fx-text-fill: red
+}
+
+.thumbShape {
+    -fx-background-color: transparent; /* No background */
+    -fx-border-color: grey; /* Border color */
+    -fx-border-width: 2px; /* Border thickness */
+    -fx-border-style: dashed; /* Dashed border */
+    -fx-border-radius: 96px; /* Ensures an oval shape */
+    -fx-background-radius: 96px; /* Matches the border */
+    -fx-shape: "M 64 0 A 64 96 0 1 1 64 192 A 64 96 0 1 1 64 0"; /* Ensures correct oval shape */
+    -fx-pref-width: 128px;
+    -fx-pref-height: 193px;
+     -fx-min-width: 128px;
+     -fx-min-height: 193px;
+     -fx-max-width: 128px;
+     -fx-max-height: 193px;
+     -fx-alignment: center;
+}
+
+.thumbShape {
+    -fx-background-color: transparent; /* No background */
+    -fx-border-color: grey; /* Border color */
+    -fx-border-width: 2px; /* Border thickness */
+    -fx-border-style: dashed; /* Dashed border */
+    -fx-border-radius: 100px; /* Oval shape */
+    -fx-background-radius: 100px; /* Ensure rounded */
+    -fx-pref-width: 100px;
+    -fx-pref-height: 80px;
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 5);
+    -fx-opacity: 0.9;
+    -fx-border-color: grey; /* Ensure border is visible */
+    -fx-border-width: 2px;
+    -fx-border-style: dashed;
+    -fx-border-radius: 40px; /* Adjust for rounded corners */
+}
+
+.image-view ImageView {
+    -fx-fit-width: 100px;
+    -fx-fit-height: 80px;
+
+}
+
+.fingerPrintHolder{
+fx-border-color: #0d0c22 #0d0c22 #0d0c22 #0d0c22; /* Top is transparent, other sides are black */
+    -fx-border-width: 1px 1px 1px 1px; /* No top border, others are 2px */
+    -fx-border-style: solid;
+}
+
+.mfx-button .text {
+	-fx-font-smoothing-type: lcd;
+}
+
+
+.custom {
+	-fx-background-color: -mfx-purple;
+	-fx-text-fill: white
+}
+
+.primary {
+	-fx-background-color: #495584;
+	-fx-text-fill: white
+}
+
+.secondary{
+  -fx-background-color: #83b6db;
+  -fx-text-fill: white
+}
+
+.danger{
+-fx-background-color: red;
+  -fx-text-fill: white
+}
+
+
+.outline-button {
+	-fx-background-color: transparent;
+	-fx-border-color: -mfx-purple;
+	-fx-border-radius: 3;
+
+	-fx-text-fill: -mfx-purple;
+}
+
+.outline-button:hover,
+.outline-button:focused {
+	-fx-background-color: -mfx-purple;
+	-fx-text-fill: white;
+}
+
+
+.link-button {
+	-fx-background-color: transparent;
+	-fx-border-radius: 3;
+	-fx-text-fill: #0096FF;
+	-fx-underline: true;
+	-fx-cursor: hand;
+}
+
+.link-button:armed,
+.link-button:focused {
+	-fx-border-color: #006BFF;
+	-fx-text-fill: #006BFF;
+}
+
+.link-button .mfx-ripple-generator {
+	-mfx-ripple-color: #D9E9FF;
+}
+
+.addressField{
+	-fx-background-color: white;
+	-fx-background-radius: 5;
+	-fx-border-color: lightgray;
+	-fx-border-radius: 5;
+	-fx-padding: 5;
+
+	-fx-font-family: "Open Sans Regular";
+}
+
+.mfx-text-field {
+	-mfx-main: -mfx-purple;
+
+	-fx-background-color: white;
+	-fx-background-radius: 5;
+	-fx-border-color: lightgray;
+	-fx-border-radius: 5;
+	-fx-padding: 5;
+
+	-fx-font-family: "Open Sans Regular";
+}
+
+.mfx-text-field:readonly,
+.mfx-text-field:readonly .text-field {
+	-fx-cursor: default;
+}
+
+.mfx-text-field .text-field {
+	-fx-highlight-fill: #ECE0FD; /* Selected text highlight */
+	-fx-prompt-text-fill: -mfx-text-me; /* Prompt text color */
+}
+
+.mfx-text-field .text-field .text {
+	-fx-font-smoothing-type: lcd;
+}
+
+.mfx-text-field:focus-within {
+	-fx-background-insets: 2;
+	-fx-border-color: -mfx-main;
+	-fx-border-width: 1.5;
+	-fx-border-insets: -0.5;
+}
+
+.mfx-text-field .floating-text {
+	-fx-font-family: "Open Sans Regular";
+	-fx-text-fill: -mfx-text-he;
+}
+
+.mfx-text-field:floating .floating-text {
+	-fx-background-color: white;
+}
+
+.mfx-text-field:focus-within .floating-text {
+	-fx-text-fill: -mfx-main;
+}
+
+.mfx-text-field .measure-unit {
+	-fx-font-family: "Open Sans Regular";
+	-fx-text-fill: -mfx-text-he;
+}
+
+.mfx-text-field .text-field {
+	-fx-text-box-border: transparent;
+	-fx-background-color: transparent;
+	-fx-backrgound-insets: 0;
+	-fx-padding: 0;
+}
+
+.mfx-text-field .text-field:focused {
+	-fx-focus-color: transparent;
+	-fx-faint-focus-color: transparent;
+}
+
+.mfx-text-field:disabled {
+	-fx-border-color: rgba(0, 0, 0, 0.1);
+}
+
+.mfx-text-field:disabled .floating-text {
+	-fx-text-fill: -mfx-text-disabled;
+}
+
+.mfx-text-field:disabled .text-field {
+	-fx-text-inner-color: -mfx-text-disabled;
+}
+
+
+.table-view {
+    -fx-background-color: #f5f7fc;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-family: 'Visby Round CF Bold';
+}
+
+.table-view .column-header-background {
+    -fx-background-color:  #495584;
+    -fx-background-radius: 10px 10px 0 0;
+     -fx-padding: 10px;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+     }
+
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell {
+    -fx-background-color: #ffffff;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+}
+.table-view .table-cell {
+    -fx-alignment: CENTER; /* Centers text horizontally and vertically */   }
+
+.table-row-cell:odd {
+    -fx-background-color: #f0f3ff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #d0d7ff;
+    -fx-text-fill: black;
+}
+
+.table-row-cell .text {
+    -fx-font-size: 13px;
+    -fx-fill: #333;
+}
+
+.loaderLabel{
+ -fx-font-size: 16;
+ -fx-font-family: 'Visby Round CF Medium';
+}
+
+
+.notificationLabel{
+-fx-background-color: red;
+ -fx-margin-bottom:10;
+  -fx-padding: 10px;
+ -fx-text-fill: white;
+   -fx-font-size: 14px;
+   -fx-font-family: 'Visby Round CF Medium';
+   -fx-background-radius: 10px;
+}
+
+.notificationLabelSuccess{
+-fx-background-color: green;
+ -fx-margin-bottom:10;
+  -fx-padding: 10px;
+ -fx-text-fill: white;
+   -fx-font-size: 14px;
+   -fx-font-family: 'Visby Round CF Medium';
+   -fx-background-radius: 10px;
+}

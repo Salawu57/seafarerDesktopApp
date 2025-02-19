@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.LoaderController">
+    <!-- Full-screen backdrop -->
+    <Rectangle fx:id="backdrop" width="1000" height="800" fill="rgba(0, 0, 0, 0.5)"/>
+
+    <VBox alignment="CENTER" spacing="10" style="-fx-background-color: white; -fx-padding: 20px; -fx-background-radius: 10;">
+        <Label text="This is a full-screen modal"/>
+        <Button text="Close"/>
+    </VBox>
+</StackPane>
