@@ -10,6 +10,8 @@ import com.salawubabatunde.seafarerbiometric.model.SeafarerData;
 import com.salawubabatunde.seafarerbiometric.model.Stats;
 import com.salawubabatunde.seafarerbiometric.model.UserData;
 import com.salawubabatunde.seafarerbiometric.services.ApiService;
+import com.salawubabatunde.seafarerbiometric.services.CheckInternetConnection;
+import com.salawubabatunde.seafarerbiometric.services.ToastMessage;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
 import io.github.palexdev.materialfx.dialogs.MFXDialogs;
@@ -43,6 +45,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class LoginController implements Initializable {
 
@@ -69,6 +74,10 @@ public class LoginController implements Initializable {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private LoaderController loaderController;
+
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+
 
     private  Stage stage;
     public LoginController() {
@@ -97,51 +106,7 @@ public class LoginController implements Initializable {
 //        loginButton.setOnAction(event -> handleLogin());
     }
 
-//  Get stats
-    private void getStats(){
-        Task<String> task = new Task<>() {
-            @Override
-            protected String call() throws Exception {
-                // Add proper exception handling for login call
-                try {
-                    return ApiService.getStats();
-                } catch (Exception e) {
-                    // Handle other exceptions
-                    updateMessage("Unexpected error: " + e.getMessage());
-                    return null;
-                }
-            }
-        };
 
-        task.setOnSucceeded(ev -> {
-            String result = task.getValue();
-
-            if (result != null) {
-                try {
-                    JsonNode res = objectMapper.readTree(result);
-                    Stats.getInstance().setTotalSeafarer(res.get("seafarerStats").asText());
-                    Stats.getInstance().setPendingBiometric(res.get("pendingStats").asText());
-                    Stats.getInstance().setCaptureBiometric(res.get("capturedStats").asText());
-                    System.out.println(res.get("seafarerStats").asText());
-
-                } catch (JsonProcessingException e) {
-                    showNotification("Unable to fetch records. Please check your internet connection");
-                    throw new RuntimeException(e);
-                }
-
-            } else {
-                System.out.println("Task message: " + task.getMessage());
-            }
-        });
-
-        task.setOnFailed(ev -> {
-            // Handle task failure
-            System.out.println("Task failed: " + task.getMessage());
-        });
-
-
-        new Thread(task).start();
-    }
 
     private void loading(){
         loaderController = new LoaderController(stage, "Logging in...");
@@ -152,93 +117,59 @@ public class LoginController implements Initializable {
         loaderController.disMissLoader();
     }
 
-// Get Seafarers
-    private void getSeafarers(){
-
-        Task<String> task = new Task<>() {
-            @Override
-            protected String call() throws Exception {
-                // Add proper exception handling for login call
-                try {
-                    return ApiService.getSeafarers();
-                } catch (Exception e) {
-                    // Handle other exceptions
-                    updateMessage("Unexpected error: " + e.getMessage());
-                    return null;
-                }
-            }
-        };
-
-        task.setOnSucceeded(ev -> {
-            String result = task.getValue();
-
-            if (result != null) {
-                try {
-                    JsonNode res = objectMapper.readTree(result);
-                    JsonNode seafarersList = res.get("seafarers");
-                    SeafarerData.getInstance().setSeafarers(seafarersList);
-                    System.out.println(seafarersList);
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-
-            } else {
-                System.out.println("Task message: " + task.getMessage());
-            }
-        });
-
-        task.setOnFailed(ev -> {
-            // Handle task failure
-            System.out.println("Task failed: " + task.getMessage());
-        });
 
 
-        new Thread(task).start();
-    }
-
-    public void showNotification(String messageText) {
-        Platform.runLater(() -> {
-
-            Label notificationLabel = new Label(messageText);
-            //notificationLabel.setStyle("-fx-background-color: white; -fx-margin-bottom:10;  -fx-padding: 10px; -fx-font-size: 14px; -fx-background-radius: 10px;");
-            notificationLabel.getStyleClass().add("notificationLabel");
-
-            StackPane notificationContainer = new StackPane(notificationLabel);
-            //setStyle("-fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 10px; -fx-background-radius: 5px;");
-            // notificationContainer.setMaxWidth(300);
-            notificationContainer.setTranslateY(-50); // Position it at the top
-
-            notificationCenter.getChildren().add(notificationContainer);
-            StackPane.setAlignment(notificationContainer, Pos.BOTTOM_CENTER);
-
-            // Fade in effect
-            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), notificationContainer);
-            fadeIn.setFromValue(0);
-            fadeIn.setToValue(1);
-            fadeIn.play();
-
-            // Automatically remove notification after 3 seconds
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
-                FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), notificationContainer);
-                fadeOut.setFromValue(1.0);
-                fadeOut.setToValue(0.0);
-                fadeOut.setOnFinished(e -> notificationCenter.getChildren().remove(notificationContainer));
-                fadeOut.play();
-            }));
-            timeline.setCycleCount(1);
-            timeline.play();
-        });
-    }
+//    public void showNotification(String messageText) {
+//        Platform.runLater(() -> {
+//
+//            Label notificationLabel = new Label(messageText);
+//            //notificationLabel.setStyle("-fx-background-color: white; -fx-margin-bottom:10;  -fx-padding: 10px; -fx-font-size: 14px; -fx-background-radius: 10px;");
+//            notificationLabel.getStyleClass().add("notificationLabel");
+//
+//            StackPane notificationContainer = new StackPane(notificationLabel);
+//            //setStyle("-fx-background-color: rgba(0, 0, 0, 0.7); -fx-padding: 10px; -fx-background-radius: 5px;");
+//            // notificationContainer.setMaxWidth(300);
+//            notificationContainer.setTranslateY(-50); // Position it at the top
+//
+//            notificationCenter.getChildren().add(notificationContainer);
+//            StackPane.setAlignment(notificationContainer, Pos.BOTTOM_CENTER);
+//
+//            // Fade in effect
+//            FadeTransition fadeIn = new FadeTransition(Duration.seconds(0.5), notificationContainer);
+//            fadeIn.setFromValue(0);
+//            fadeIn.setToValue(1);
+//            fadeIn.play();
+//
+//            // Automatically remove notification after 3 seconds
+//            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(3), event -> {
+//                FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), notificationContainer);
+//                fadeOut.setFromValue(1.0);
+//                fadeOut.setToValue(0.0);
+//                fadeOut.setOnFinished(e -> notificationCenter.getChildren().remove(notificationContainer));
+//                fadeOut.play();
+//            }));
+//            timeline.setCycleCount(1);
+//            timeline.play();
+//        });
+//    }
 
 
 
     @FXML
     private void handleLogin(ActionEvent event) {
 
+       boolean isConnected = CheckInternetConnection.getInstance().isInternetAvailable();
+
+        if(!isConnected){
+            ToastMessage.showNotification("No Internet Connection",
+                    notificationCenter);
+            return;
+        }
+
         String email = emailField.getText();
         String password = passwordField.getText();
         if(email.isEmpty() || password.isEmpty()) {
-            showNotification("All fields are required");
+            ToastMessage.showNotification("All fields are required", notificationCenter);
             return;
         }
         loading();
@@ -270,7 +201,7 @@ public class LoginController implements Initializable {
 
                     if(res.get("message").asText().equals("Validation failed") || res.get("message").asText().equals("The provided credentials are incorrect")){
                      loaderController.disMissLoader();
-                     showNotification("Invalid email or password");
+                     ToastMessage.showNotification("Invalid email or password", notificationCenter);
                      return;
 
                     }
@@ -316,20 +247,20 @@ public class LoginController implements Initializable {
 
                 } catch (IOException e) {
                     loaderController.disMissLoader();
-                    showNotification(e.getMessage());
+                    ToastMessage.showNotification(e.getMessage(),notificationCenter);
                     throw new RuntimeException(e);
                 }
 
             } else {
                 loaderController.disMissLoader();
-                showNotification("Opps something went wrong. Please try again later");
+                ToastMessage.showNotification("Opps something went wrong. Please try again later", notificationCenter);
                 System.out.println("Login failed with message: " + task.getMessage());
             }
         });
 
         task.setOnFailed(ev -> {
             loaderController.disMissLoader();
-            showNotification("Opps something went wrong. Please try again later");
+            ToastMessage.showNotification("Opps something went wrong. Please try again later", notificationCenter);
             System.out.println("Task failed: " + task.getMessage());
         });
 
@@ -338,9 +269,11 @@ public class LoginController implements Initializable {
  }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        getStats();
-        getSeafarers();
+
     }
+
+
 }

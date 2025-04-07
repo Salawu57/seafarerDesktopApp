@@ -8,6 +8,7 @@ import com.salawubabatunde.seafarerbiometric.controllers.CaptureController;
 import com.salawubabatunde.seafarerbiometric.controllers.LoginController;
 import com.salawubabatunde.seafarerbiometric.css.themes.MFXThemeManager;
 import com.salawubabatunde.seafarerbiometric.css.themes.Themes;
+import com.salawubabatunde.seafarerbiometric.model.SeafarerData;
 import com.salawubabatunde.seafarerbiometric.model.Stats;
 import com.salawubabatunde.seafarerbiometric.services.ApiService;
 import fr.brouillard.oss.cssfx.CSSFX;
@@ -21,6 +22,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.opencv.core.Core;
 
 public class SeafarerBiometric extends Application {
 
@@ -31,7 +33,7 @@ public class SeafarerBiometric extends Application {
 
         CSSFX.start();
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         primaryStage.setWidth(screenBounds.getWidth());
         primaryStage.setHeight(screenBounds.getHeight());
         primaryStage.setX(screenBounds.getMinX());
@@ -46,6 +48,8 @@ public class SeafarerBiometric extends Application {
         controller.setStage(primaryStage); // Now primaryStage has a title
 
         System.out.println("Stage set in SeafarerBiometric: " + primaryStage.getTitle());
+        Stats.getInstance().getStats();
+        SeafarerData.getInstance().loadSeafarers();
 
         Scene scene = new Scene(root);
         MFXThemeManager.addOn(scene, Themes.DEFAULT, Themes.LEGACY);

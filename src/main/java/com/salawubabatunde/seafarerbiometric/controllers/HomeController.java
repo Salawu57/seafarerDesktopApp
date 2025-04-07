@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.salawubabatunde.seafarerbiometric.MFXResourcesLoader;
 import com.salawubabatunde.seafarerbiometric.css.themes.MFXThemeManager;
 import com.salawubabatunde.seafarerbiometric.css.themes.Themes;
+import com.salawubabatunde.seafarerbiometric.model.SeafarerData;
 import com.salawubabatunde.seafarerbiometric.model.Stats;
 import com.salawubabatunde.seafarerbiometric.model.UserData;
 import com.salawubabatunde.seafarerbiometric.services.ApiService;
@@ -125,7 +126,7 @@ private Stage stage;
 
 
 
-          }
+    }
 
 private void initLoading(){
 
@@ -274,6 +275,8 @@ private void isLoading(){
             dialog.close();
         }
     }
+
+
 
 
 

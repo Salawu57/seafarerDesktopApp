@@ -2,7 +2,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
-<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.LoaderController">
+<StackPane xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.LoaderController">
     <!-- Full-screen backdrop -->
     <Rectangle fx:id="backdrop" width="1000" height="800" fill="rgba(0, 0, 0, 0.5)"/>
 

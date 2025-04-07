@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="rootPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1349.0" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.HomeController">
+<BorderPane fx:id="rootPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1349.0" stylesheets="@../css/home.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.HomeController">
    <left>
       <AnchorPane prefHeight="812.0" prefWidth="278.0" BorderPane.alignment="CENTER">
          <children>

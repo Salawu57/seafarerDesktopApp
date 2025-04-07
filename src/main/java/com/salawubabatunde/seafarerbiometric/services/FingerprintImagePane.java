@@ -54,6 +54,7 @@ public class FingerprintImagePane extends Pane {
         drawImage(width, height);
     }
 
+
     public void clearImage() {
         writableImage = null; // Remove the stored image
         GraphicsContext gc = canvas.getGraphicsContext2D();

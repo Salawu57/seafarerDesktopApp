@@ -2,6 +2,7 @@ module com.salawubabatunde.seafarerbiometric {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.web;
+    requires Java.WebSocket;
 
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
@@ -25,6 +26,9 @@ module com.salawubabatunde.seafarerbiometric {
     requires com.fasterxml.jackson.databind;
     requires org.apache.commons.imaging;
     requires dpuareu;
+    requires opencv;
+    requires javafx.swing;
+    requires SigPlus;
 
 
     opens com.salawubabatunde.seafarerbiometric.controllers to javafx.fxml;

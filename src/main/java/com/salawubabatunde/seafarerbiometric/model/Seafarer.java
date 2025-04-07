@@ -34,6 +34,18 @@ public class Seafarer {
     public StringProperty lastNameProperty() { return lastName; }
     public StringProperty otherNameProperty() { return otherName; }
 
+    public String getFirstName() {
+        return firstName.get();
+    }
+
+    public String getLastName() {
+        return lastName.get();
+    }
+
+    public String getOtherName() {
+        return otherName.get();
+    }
+
     // Return the status label
     public Label getStatus() { return status; }
 }

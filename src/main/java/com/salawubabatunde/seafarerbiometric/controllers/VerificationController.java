@@ -43,7 +43,7 @@ public class VerificationController implements Initializable {
     HBox notificationCenter;
 
     @FXML
-    private Pane emailPane, infoPane,fingerPrintPreview;
+    private Pane emailPane, infoPane,fingerPrintPreview, signatureContainer;
 
     @FXML
     MFXTextField emailInput,fullName, seafarerID, phoneNumber, email, dob, pob, officeLocation, town, state, tribe;
@@ -52,7 +52,7 @@ public class VerificationController implements Initializable {
     TextArea address;
 
     @FXML
-    ImageView profileImg;
+    ImageView profileImg, signatureView;
 
     @FXML
     VBox loader;
@@ -85,11 +85,6 @@ public class VerificationController implements Initializable {
     private void startVerification() {
 
         System.out.println("Starting fingerprint capture...");
-
-//        if(rightCapture == 0  && leftCapture == 0){
-//            captureMessage("Click Capture to start. Begin with the right thumb");
-//        }
-
 
         if (reader == null) {
             initializeReader();
@@ -146,7 +141,6 @@ public class VerificationController implements Initializable {
                 fingerPrint_FMD = engine.CreateFmd(capturedImage, Fmd.Format.ANSI_378_2004);
 
                 int target_falsematch_rate = Engine.PROBABILITY_ONE / 100000;
-//                Fmd[] fmds =  listOfBiometric;
 
                  Engine.Candidate[] matches = engine.Identify(fingerPrint_FMD, 0, m_fmdArray, target_falsematch_rate, 1);
 
@@ -163,7 +157,6 @@ public class VerificationController implements Initializable {
                 loader.setVisible(true);
                 getSeafarer(email);
 
-//                showNotification("finger print match", "notificationLabelSuccess");
             }else{
                 loader.setVisible(false);
                 showNotification("finger print not match", "notificationLabel");
@@ -215,6 +208,12 @@ public class VerificationController implements Initializable {
                     JsonNode res = objectMapper.readTree(result);
                     if (res.has("biometrics") && !res.get("biometrics").isNull()) {
                         JsonNode biometrics = res.get("biometrics");
+                        if(biometrics.isEmpty()){
+                            loader.setVisible(false);
+                            showNotification("The fingerprint data record is empty. Please capture it before proceeding with verification", "notificationLabel");
+                            System.out.println("finger print data is empty.");
+                            return;
+                        }
                         for(JsonNode biometric : biometrics){
                             System.out.println(biometric.get("id"));
                             System.out.println(biometric.get("email"));
@@ -298,12 +297,15 @@ public class VerificationController implements Initializable {
                 return;
             }
 
-            reader = readers.get(0);
+            int readerNumber = readers.size() - 1;
+
+            reader = readers.getLast();
             reader.Open(Reader.Priority.EXCLUSIVE);
 
 
             engine = UareUGlobal.GetEngine();
 
+            System.out.println("Using fingerprint reader: " + readers.size());
             System.out.println("Using fingerprint reader: " + reader.GetDescription().name);
         } catch (UareUException e) {
             System.err.println("Error initializing fingerprint reader: " + e.getMessage());
@@ -360,14 +362,34 @@ public class VerificationController implements Initializable {
                         state.setText(seafarer.has("state") ? seafarer.get("state").asText() : "N/A");
                         tribe.setText(seafarer.has("tribe") ? seafarer.get("tribe").asText() : "N/A");
 
-                        if (seafarer.has("seafarer_picture") && !seafarer.get("seafarer_picture").asText().isEmpty()) {
+                        if (seafarer.has("seafarer_picture") && !seafarer.get("seafarer_picture").asText().isEmpty() && !seafarer.get("seafarer_picture").asText().equals("null")) {
                             String base64String = seafarer.get("seafarer_picture").asText();
+                            String imageLink = ApiService.baseUrl+"/images/"+seafarer.get("seafarer_picture").asText();
+                            System.out.println("image 1 ======> " + imageLink);
                             try {
-                                byte[] imageBytes = Base64.getDecoder().decode(base64String);
-                                Image image = new Image(new ByteArrayInputStream(imageBytes));
+//                                byte[] imageBytes = Base64.getDecoder().decode(base64String);
+                                Image image = new Image(imageLink);
                                 profileImg.setImage(image);
                                 profileImg.setFitWidth(157);
                                 profileImg.setPreserveRatio(true);
+                            } catch (IllegalArgumentException e) {
+                                // Handle invalid base64 string (e.g., empty or malformed)
+                                showNotification("Invalid image data.", "notificationLabel");
+                                System.out.println("Error decoding base64 image: " + e.getMessage());
+                            }
+                        }
+
+                        if (seafarer.has("signature") && !seafarer.get("signature").asText().isEmpty() && !seafarer.get("signature").asText().equals("null")) {
+
+                            String imageLink = ApiService.baseUrl+"/images/"+seafarer.get("signature").asText();
+
+                            System.out.println("image 2 ======> " + imageLink);
+                            try {
+//                                byte[] imageBytes = Base64.getDecoder().decode(base64String);
+                                Image image = new Image(imageLink);
+                                signatureView.setImage(image);
+                                //profileImg.setFitWidth(157);
+                                signatureView.setPreserveRatio(true);
                             } catch (IllegalArgumentException e) {
                                 // Handle invalid base64 string (e.g., empty or malformed)
                                 showNotification("Invalid image data.", "notificationLabel");
@@ -380,7 +402,7 @@ public class VerificationController implements Initializable {
 
                     } else {
                        loader.setVisible(false);
-//                        showNotification("Seafarer not found.", "notificationLabel");
+                        showNotification("Seafarer not found.", "notificationLabel");
                         System.out.println("Seafarer not found.");
 
                     }
@@ -388,19 +410,19 @@ public class VerificationController implements Initializable {
                 } catch (JsonProcessingException e) {
 
                   loader.setVisible(false);
-//                    showNotification("Seafarer not found.Please try again later.", "notificationLabel");
+                   showNotification("Seafarer not found.Please try again later.", "notificationLabel");
                     throw new RuntimeException(e.getMessage());
                 }
 
             } else {
-               // showNotification(task.getMessage(), "notificationLabel");
+               showNotification(task.getMessage(), "notificationLabel");
                 System.out.println("Task message: " + task.getMessage());
             }
         });
 
         task.setOnFailed(ev -> {
             // Handle task failure
-            //showNotification(task.getMessage(), "notificationLabel");
+            showNotification(task.getMessage(), "notificationLabel");
             System.out.println("Task failed: " + task.getMessage());
         });
 
@@ -438,6 +460,26 @@ public class VerificationController implements Initializable {
             timeline.setCycleCount(1);
             timeline.play();
         });
+    }
+
+
+    @FXML
+    private void resetImagePreviewPane() {
+        fingerprintImagePane.clearImage();
+        emailPane.setVisible(true);
+        infoPane.setVisible(false);
+        fullName.clear();
+        seafarerID.clear();
+        phoneNumber.clear();
+        email.clear();
+        address.clear();
+        dob.clear();
+        pob.clear();
+        officeLocation.clear();
+        town.clear();
+        state.clear();
+        tribe.clear();
+        startVerification();
     }
 
 

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<StackPane prefHeight="165.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.PageLoaderController">
+<StackPane prefHeight="165.0" prefWidth="283.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.PageLoaderController">
     <children>
         <VBox alignment="CENTER" spacing="10" style="-fx-background-color: white; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;">
             <Label text="This is a dialog!" />

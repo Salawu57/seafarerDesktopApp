@@ -6,15 +6,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ApiService {
-
-    private static final String API_URL = "https://seafarer.ns-edms.com.ng/api/admin/login";
-    private static final String API_GETSTATS = "https://seafarer.ns-edms.com.ng/api/admin/getStats";
-    private static final String API_GETSEAFARERS = "http://localhost:8000/api/admin/getAllSeafarers";
-    private static final String API_GETSEAFARER = "http://localhost:8000/api/admin/getSeafarer/";
-    private static final String API_CAPTURE_BIOMETRIC = "http://localhost:8000/api/admin/biometric/store";
-    private static final String API_GET_BIOMETRICS_DATA = "http://localhost:8000/api/admin/getAllBiometrics";
+    //https://seafarer.ns-edms.com.ng http://127.0.0.1:8000
+    public static final String baseUrl = "https://seafarer.ns-edms.com.ng";
+    private static final String API_URL = baseUrl + "/api/admin/login";
+    private static final String API_GETSTATS = baseUrl + "/api/admin/getStats";
+    public static final String API_GETSEAFARERS = baseUrl + "/api/admin/getAllSeafarers";
+    private static final String API_GETSEAFARER = baseUrl + "/api/admin/getSeafarer/";
+    private static final String API_CAPTURE_BIOMETRIC = baseUrl + "/api/admin/biometric/store";
+    private static final String API_GET_BIOMETRICS_DATA = baseUrl + "/api/admin/getAllBiometrics";
 
     private static final OkHttpClient client = new OkHttpClient();
     private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -81,8 +84,11 @@ public class ApiService {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
+
             if (!response.isSuccessful()) {
-                return "Request failed: " + response.body().string();
+                String jsonResponse = response.body().string();
+                JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                return jsonNode.toString();
             }
 
             // Parse the response body to JSON using Jackson
@@ -132,14 +138,17 @@ public class ApiService {
                 .build();
 
         try (Response response = client.newCall(request).execute()) {
-            if (!response.isSuccessful()) {
-                return "Request failed: " + response.body().string();
-            }
-
-            // Parse the response body to JSON using Jackson
             String jsonResponse = response.body().string();
-            JsonNode jsonNode = objectMapper.readTree(jsonResponse);
 
+            System.out.println(jsonResponse);
+
+            if (!response.isSuccessful()) {
+                JsonNode jsonNode = objectMapper.readTree(jsonResponse);
+                // Return the parsed JSON as a string (or process it further if needed)
+                return jsonNode.toString();
+            }
+            // Parse the response body to JSON using Jackson
+            JsonNode jsonNode = objectMapper.readTree(jsonResponse);
             // Return the parsed JSON as a string (or process it further if needed)
             return jsonNode.toString();
         } catch (IOException e) {
@@ -147,7 +156,7 @@ public class ApiService {
         }
     }
 
-    public static String captureBiometric(String seafarerNo, String seafarer_id, String nin, String right_thumb, String left_thumb, String email) {
+    public static String captureBiometric(String seafarerNo, String seafarer_id, String nin, String right_thumb, String left_thumb, String email, String photo, String signature) {
         RequestBody body = new FormBody.Builder()
                 .add("seafarerNo", seafarerNo)
                 .add("seafarer_id", seafarer_id)
@@ -155,6 +164,8 @@ public class ApiService {
                 .add("right_thumb_fmd", right_thumb)
                 .add("left_thumb_fmd", left_thumb)
                 .add("email", email)
+                .add("photo", photo)
+                .add("signature", signature)
                 .build();
 
         Request request = new Request.Builder()
@@ -181,6 +192,9 @@ public class ApiService {
             return "Error: " + e.getMessage();
         }
     }
+
+
+
 
 
 

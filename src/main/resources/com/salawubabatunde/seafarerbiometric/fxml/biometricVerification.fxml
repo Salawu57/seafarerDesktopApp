@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1071.0" stylesheets="@../css/CaptureBiometric.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.VerificationController">
+<AnchorPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="1071.0" stylesheets="@../css/CaptureBiometric.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.salawubabatunde.seafarerbiometric.controllers.VerificationController">
    <children>
       <Label styleClass="pageTitle" text="Biometric Verification" />
       <Pane layoutX="459.0" layoutY="46.0" prefWidth="598.0" styleClass="container">
@@ -82,7 +82,7 @@
             </Pane>
          </children>
       </Pane>
-      <VBox alignment="TOP_CENTER" layoutY="46.0" prefHeight="341.0" prefWidth="445.0" styleClass="container">
+      <VBox alignment="TOP_CENTER" layoutY="46.0" prefHeight="484.0" prefWidth="445.0" styleClass="container">
          <children>
             <Label styleClass="subTitle" text="Use Biometric Verification ">
                <VBox.margin>
@@ -93,9 +93,14 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
                   <Button mnemonicParsing="false" onMouseClicked="#startVerification" styleClass="secondary" text="Capture finger print" />
-                  <Button mnemonicParsing="false" styleClass="danger" text="Clear" />
+                  <Button mnemonicParsing="false" onMouseClicked="#resetImagePreviewPane" styleClass="danger" text="Clear" />
                </children>
             </HBox>
+            <Pane fx:id="signatureContainer" prefHeight="128.0" prefWidth="423.0">
+               <children>
+                  <ImageView fx:id="signatureView" fitHeight="128.0" fitWidth="423.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
          </children>
       </VBox>
       <HBox fx:id="notificationCenter" alignment="CENTER" layoutX="278.0" layoutY="10.0" prefHeight="55.0" prefWidth="803.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
